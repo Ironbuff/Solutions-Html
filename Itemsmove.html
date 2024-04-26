@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Move Items in List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    h2 {
+        text-align: center;
+        margin-top: 30px;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 400px;
+    }
+    li {
+        padding: 15px;
+        border: 1px solid white;
+        background-color: whitesmoke;
+        margin-bottom: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    li:hover {
+        background-color: white;
+    }
+    li.drag-over {
+        border: 2px dashed rebeccapurple;
+        background-color: black;
+    }
+    .back-link {
+        position: absolute; 
+        bottom: 20px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: blue;
+        color: whitesmoke;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+        background-color: rebeccapurple;
+    }
+</style>
+</head>
+<body>
+
+<h2>Move Items in List</h2>
+
+<ul id="itemList">
+    <li draggable="true">Item 1</li>
+    <li draggable="true">Item 2</li>
+    <li draggable="true">Item 3</li>
+    <li draggable="true">Item 4</li>
+    <li draggable="true">Item 5</li>
+</ul>
+<a href="Home.html" class="back-link">Back to Home</a>
+
+<script>
+    const items = document.querySelectorAll('#itemList li');
+
+    items.forEach(item => {
+        item.addEventListener('dragstart', dragStart);
+        item.addEventListener('dragover', dragOver);
+        item.addEventListener('dragenter', dragEnter);
+        item.addEventListener('dragleave', dragLeave);
+        item.addEventListener('drop', dragDrop);
+        item.addEventListener('dragend', dragEnd);
+    });
+
+    let dragItem = null;
+
+    function dragStart() {
+        dragItem = this;
+        setTimeout(() => this.style.display = 'none', 0);
+    }
+
+    function dragOver(e) {
+        e.preventDefault();
+    }
+
+    function dragEnter(e) {
+        e.preventDefault();
+        this.style.border = '2px dashed #aaa';
+    }
+
+    function dragLeave() {
+        this.style.border = 'none';
+    }
+
+    function dragDrop() {
+        this.style.border = 'none';
+        this.parentNode.insertBefore(dragItem, this);
+    }
+
+    function dragEnd() {
+        this.style.display = 'block';
+        dragItem = null;
+    }
+</script>
+
+</body>
+</html>

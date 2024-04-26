@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monetary Value Formatter</title>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid whitesmoke;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rebeccapurple;
+    }
+
+    p#formattedValue {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .back-link {
+        position: absolute; 
+        bottom: 20px; 
+        left: 50%; 
+        transform: translateX(-50%);
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: blue;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+        background-color: rebeccapurple;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Monetary Value Formatter</h2>
+    <label for="valueInput">Enter a monetary value:</label>
+    <input type="text" id="valueInput" placeholder="Enter value...">
+    <div>
+      <input type="radio" id="nepaliUnits" name="units" checked>
+      <label for="nepaliUnits">Nepali Units</label>
+      <input type="radio" id="internationalUnits" name="units">
+      <label for="internationalUnits">International Units</label>
+    </div>
+    <button onclick="formatValue()">Format Value</button>
+    <p id="formattedValue"></p>
+  </div>
+  <a href="Home.html" class="back-link">Back to Home</a>
+  <script>
+    function formatValue() {
+      var valueInput = document.getElementById("valueInput").value;
+      var isNepaliUnits = document.getElementById("nepaliUnits").checked;
+
+      
+      if (isNaN(valueInput) || valueInput === "") {
+        alert("Please enter a valid numerical value.");
+        return;
+      }
+
+      var value = parseFloat(valueInput);
+
+ 
+      var formattedValue;
+      if (isNepaliUnits) {
+        formattedValue = new Intl.NumberFormat("en-IN", {
+          style: "currency",
+          currency: "NPR"
+        }).format(value);
+      } else {
+        formattedValue = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD"
+        }).format(value);
+      }
+
+  
+      document.getElementById("formattedValue").textContent = "Formatted value: " + formattedValue;
+    }
+  </script>
+</body>
+</html>

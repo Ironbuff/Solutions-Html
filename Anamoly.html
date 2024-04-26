@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anagram Checker</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid whitesmoke;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rebeccapurple;
+}
+
+p#result {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+.back-link {
+        position: absolute; 
+        bottom: 20px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: blue;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+        background-color: rebeccapurple;
+    }
+</style>
+</head>
+<body>
+    <h1>Anagram Checker</h1>
+    <form id="anagramForm">
+        <input type="text" id="string1" placeholder="Enter first string">
+        <input type="text" id="string2" placeholder="Enter second string">
+        <button type="button" onclick="checkAnagram()">Check Anagram</button>
+    </form>
+    <p id="result"></p>
+    <a href="Home.html" class="back-link">Back to Home</a>
+
+    <script>
+        function checkAnagram() {
+            
+            var string1 = document.getElementById("string1").value.toLowerCase().replace(/\s/g, '');
+            var string2 = document.getElementById("string2").value.toLowerCase().replace(/\s/g, '');
+
+            
+            if (string1.length !== string2.length) {
+                document.getElementById("result").textContent = "The strings are not anagrams.";
+                return;
+            }
+
+            var sortedString1 = string1.split('').sort().join('');
+            var sortedString2 = string2.split('').sort().join('');
+
+           
+            if (sortedString1 === sortedString2) {
+                document.getElementById("result").textContent = "The strings are anagrams!";
+            } else {
+                document.getElementById("result").textContent = "The strings are not anagrams.";
+            }
+        }
+    </script>
+</body>
+</html>
